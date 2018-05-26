@@ -1,2 +1,3 @@
 # sell
-springboot构建的微信点餐项目
+
+springboot+spring data jpa构建的微信点餐项目
