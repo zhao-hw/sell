@@ -31,4 +31,17 @@ public class OrderDetail {
 
     /** 商品小图.*/
     private String productIcon;
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" + "\n" + "\t" + "\t" +
+                "detailId='" + detailId + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", productId='" + productId + '\'' +
+                ", productName='" + productName + '\'' +
+                ", productPrice=" + productPrice +
+                ", productQuantity=" + productQuantity +
+                ", productIcon='" + productIcon + '\'' +
+                '}';
+    }
 }
