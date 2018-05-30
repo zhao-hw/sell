@@ -16,3 +16,7 @@ server:
 wechat:
   mpAppId: wx725796ea31778c76
   mpAppSecret: a15ac79ed233c157322751413b9aeaf0
+  mchId: 假装有mchId
+  mchKey: 假装有mchKey
+  keyPath: 假装有keyPath
+  notifyUrl: http://wechat-sell.s1.natapp.cc
