@@ -1,10 +1,13 @@
 package pers.zhw.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import pers.zhw.dataobject.OrderDetail;
+import pers.zhw.enums.OrderStatusEnum;
+import pers.zhw.enums.PayStatusEnum;
 import pers.zhw.serializer.Date2LongSerializer;
+import pers.zhw.utils.EnumUtil;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -62,5 +65,15 @@ public class OrderDTO {
                 ", updateTime=" + updateTime +
                 ", orderDetailList=" + orderDetailList +
                 '}';
+    }
+
+    @JsonIgnore
+    public OrderStatusEnum getOrderStatusEnum() {
+        return EnumUtil.getByCode(orderStatus,OrderStatusEnum.class);
+    }
+
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum() {
+        return EnumUtil.getByCode(payStatus,PayStatusEnum.class);
     }
 }

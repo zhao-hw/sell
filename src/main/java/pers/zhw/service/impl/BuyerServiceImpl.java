@@ -2,6 +2,8 @@ package pers.zhw.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pers.zhw.dto.OrderDTO;
 import pers.zhw.enums.ResultEnum;
@@ -29,6 +31,12 @@ public class BuyerServiceImpl implements BuyerService {
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
         return orderService.cancel(orderDTO);
+    }
+
+    @Override
+    public Page<OrderDTO> findList(Pageable pageable) {
+
+        return null;
     }
 
     private OrderDTO checkOrderOwner(String openid,String orderId){
