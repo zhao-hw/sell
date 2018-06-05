@@ -9,7 +9,7 @@
             <div class="row clearfix">
                 <#--列表-->
                 <div class="col-md-12 column">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <thead>
                         <tr>
                             <th>订单id</th>
@@ -34,9 +34,11 @@
                                 <td>${orderDTO.getOrderStatusEnum().msg}</td>
                                 <td>${orderDTO.getPayStatusEnum().msg}</td>
                                 <td>${orderDTO.createTime}</td>
-                                <td>详情</td>
+                                <td>
+                                    <a href="/sell/seller/order/detail?orderId=${orderDTO.orderId}"/> 详情
+                                </td>
 
-                                <#if orderDTO.getOrderStatusEnum().msg != "已取消">
+                                <#if orderDTO.getOrderStatusEnum().msg == "新订单">
                                 <td>
                                     <a href="/sell/seller/order/cancel?orderId=${orderDTO.orderId}"/> 取消
                                 </td>

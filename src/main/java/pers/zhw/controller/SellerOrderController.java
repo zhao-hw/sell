@@ -23,6 +23,7 @@ public class SellerOrderController {
 
     @Autowired
     private OrderService orderService;
+
     @GetMapping("/list")
     public ModelAndView list(@RequestParam(value = "page",defaultValue = "1") Integer page,
                              @RequestParam(value = "size",defaultValue = "3") Integer size,
@@ -50,5 +51,39 @@ public class SellerOrderController {
         map.put("msg", ResultEnum.ORDER_CANCEL_SUCCESS.getMsg());
         map.put("url","/sell/seller/order/list");
         return new ModelAndView("/common/suces");
+    }
+
+    @GetMapping("/detail")
+    public ModelAndView detail(@RequestParam(value = "orderId") String orderId,
+                               Map<String,Object> map){
+        OrderDTO orderDTO = new OrderDTO();
+        try {
+            orderDTO = orderService.findOne(orderId);
+        }catch (SellException e){
+            log.error("【卖家端取消订单】发生异常{}",e);
+            map.put("msg", e.getMessage());
+            map.put("url","/sell/seller/order/list");
+            return new ModelAndView("/common/error",map);
+        }
+        map.put("orderDTO",orderDTO);
+        return new ModelAndView("/order/detail",map);
+    }
+
+    @GetMapping("/finish")
+    public ModelAndView finish(@RequestParam(value = "orderId") String orderId,
+                               Map<String,Object> map){
+        OrderDTO orderDTO = new OrderDTO();
+        try {
+            orderDTO = orderService.findOne(orderId);
+            orderService.finish(orderDTO);
+        }catch (SellException e){
+            log.error("【卖家端完结订单】发生异常{}",e);
+            map.put("msg", e.getMessage());
+            map.put("url","/sell/seller/order/list");
+            return new ModelAndView("/common/error",map);
+        }
+        map.put("msg", ResultEnum.ORDER_FINISH_SUCCESS.getMsg());
+        map.put("url","/sell/seller/order/list");
+        return new ModelAndView("/common/suces",map);
     }
 }
