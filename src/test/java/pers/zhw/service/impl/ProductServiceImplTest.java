@@ -55,4 +55,16 @@ public class ProductServiceImplTest {
         Assert.assertEquals("皮皮虾",result.getProductName());
     }
 
+    @Test
+    public void onSale(){
+        ProductInfo productInfo = service.onSale("123");
+        Assert.assertEquals("在架",productInfo.getProductStatusEnum().getMsg());
+    }
+
+    @Test
+    public void offSale(){
+        ProductInfo productInfo = service.offSale("123");
+        Assert.assertEquals("下架",productInfo.getProductStatusEnum().getMsg());
+    }
+
 }
