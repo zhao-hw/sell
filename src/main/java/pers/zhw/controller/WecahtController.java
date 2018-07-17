@@ -27,7 +27,7 @@ public class WecahtController {
     public String authorize(@RequestParam("returnUrl") String returnUrl){
         //1.配置
         //2.调用方法
-        String url = "http://wechat-sell.s1.natapp.cc/sell/wechat/userInfo";
+        String url = "http://bravo.natapp1.cc/sell/wechat/userInfo";
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url,
                 WxConsts.OAuth2Scope.SNSAPI_BASE,
                 URLEncoder.encode(returnUrl));
