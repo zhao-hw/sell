@@ -43,7 +43,7 @@ public class SellerProductController {
         map.put("productInfoPage",productInfoPage);
         map.put("currentPage",page);
         map.put("size",size);
-        return new ModelAndView("/product/list",map);
+        return new ModelAndView("/product/productList",map);
     }
 
     @GetMapping("/on_sale")
@@ -53,10 +53,10 @@ public class SellerProductController {
             productService.onSale(productId);
         }catch (SellException e){
             map.put("msg",e.getMessage());
-            map.put("url","/sell/seller/product/list");
+            map.put("url","/sell/seller/product/productList");
             return new ModelAndView("/common/error",map);
         }
-        map.put("url","/sell/seller/product/list");
+        map.put("url","/sell/seller/product/productList");
         return new ModelAndView("/common/suces",map);
     }
 
@@ -67,10 +67,10 @@ public class SellerProductController {
             productService.offSale(productId);
         }catch (SellException e){
             map.put("msg",e.getMessage());
-            map.put("url","/sell/seller/product/list");
+            map.put("url","/sell/seller/product/productList");
             return new ModelAndView("/common/error",map);
         }
-        map.put("url","/sell/seller/product/list");
+        map.put("url","/sell/seller/product/productList");
         return new ModelAndView("/common/suces",map);
     }
 
@@ -109,7 +109,7 @@ public class SellerProductController {
             map.put("url", "/sell/seller/product/index");
             return new ModelAndView("/common/error", map);
         }
-        map.put("url", "/sell/seller/product/list");
+        map.put("url", "/sell/seller/product/productList");
         return new ModelAndView("/common/suces", map);
     }
 }
