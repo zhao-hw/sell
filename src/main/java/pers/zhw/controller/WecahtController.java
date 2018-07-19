@@ -1,5 +1,6 @@
 package pers.zhw.controller;
 
+import com.lly835.bestpay.model.PayResponse;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.exception.WxErrorException;
@@ -10,10 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import pers.zhw.dto.OrderDTO;
 import pers.zhw.enums.ResultEnum;
 import pers.zhw.exception.SellException;
+import pers.zhw.service.impl.OrderServiceImpl;
+import pers.zhw.service.impl.PayServiceImpl;
 
 import java.net.URLEncoder;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/wechat")
@@ -23,13 +29,19 @@ public class WecahtController {
     @Autowired
     private WxMpService wxMpService;
 
+    @Autowired
+    private PayServiceImpl payService;
+
+    @Autowired
+    private OrderServiceImpl orderService;
+
     @GetMapping("/authorize")
     public String authorize(@RequestParam("returnUrl") String returnUrl){
         //1.配置
         //2.调用方法
         String url = "http://bravo.natapp1.cc/sell/wechat/userInfo";
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url,
-                WxConsts.OAuth2Scope.SNSAPI_BASE,
+                WxConsts.OAuth2Scope.SNSAPI_USERINFO,
                 URLEncoder.encode(returnUrl));
         return "redirect:" + redirectUrl;
     }
@@ -46,5 +58,17 @@ public class WecahtController {
         }
         String openId = wxMpOAuth2AccessToken.getOpenId();
         return "redirect:" + returnUrl + "?openid=" + openId;
+    }
+
+    @GetMapping("/pay")
+    public ModelAndView pay(@RequestParam("orderId") String orderId,
+                            @RequestParam("returnUrl") String returnUrl,
+                            Map<String, Object> map){
+        OrderDTO orderDTO = orderService.findOne(orderId);
+        PayResponse payResponse = payService.create(orderDTO);
+        map.put("payResponse", payResponse);
+        map.put("returnUrl", returnUrl);
+        orderService.paid(orderDTO);
+        return new ModelAndView("pay/create", map);
     }
 }
