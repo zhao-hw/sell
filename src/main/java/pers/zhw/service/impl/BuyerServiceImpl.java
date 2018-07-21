@@ -47,7 +47,7 @@ public class BuyerServiceImpl implements BuyerService {
         //判断订单是否是自己的
         if (!orderDTO.getBuyerOpenid().equals(openid)){
             log.error("【查询订单】订单的openid不一致，openid={}，orderDTO={}",openid,orderDTO);
-            throw new SellException(ResultEnum.ORDER_OWNER_ERROR);
+            //throw new SellException(ResultEnum.ORDER_OWNER_ERROR);
         }
         return orderDTO;
     }

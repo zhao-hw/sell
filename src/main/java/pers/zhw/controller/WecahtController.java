@@ -26,6 +26,8 @@ import java.util.Map;
 @Slf4j
 public class WecahtController {
 
+    private String opid;
+
     @Autowired
     private WxMpService wxMpService;
 
@@ -57,6 +59,7 @@ public class WecahtController {
             throw new SellException(ResultEnum.WECHAT_MP_ERROR,e.getError().getErrorMsg());
         }
         String openId = wxMpOAuth2AccessToken.getOpenId();
+        opid = openId;
         return "redirect:" + returnUrl + "?openid=" + openId;
     }
 
@@ -68,6 +71,7 @@ public class WecahtController {
         PayResponse payResponse = payService.create(orderDTO);
         map.put("payResponse", payResponse);
         map.put("returnUrl", returnUrl);
+        orderService.update(orderDTO,opid);
         orderService.paid(orderDTO);
         return new ModelAndView("pay/create", map);
     }

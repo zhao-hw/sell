@@ -22,7 +22,7 @@ public class OrderForm {
     private String address;
 
     //openid
-    @NotEmpty(message = "openid必填")
+    //@NotEmpty(message = "openid必填")
     private String openid;
 
     //购物车

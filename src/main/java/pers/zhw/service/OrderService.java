@@ -26,4 +26,6 @@ public interface OrderService {
 
     /** 支付订单.*/
     OrderDTO paid(OrderDTO orderDTO);
+
+    OrderDTO update(OrderDTO orderDTO,String openid);
 }

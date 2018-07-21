@@ -182,4 +182,13 @@ public class OrderServiceImpl implements OrderService{
         }
         return orderDTO;
     }
+
+    @Override
+    public OrderDTO update(OrderDTO orderDTO,String openid) {
+        orderDTO.setBuyerOpenid("");
+        OrderMaster orderMaster = new OrderMaster();
+        BeanUtils.copyProperties(orderDTO,orderMaster);
+        OrderMaster updateMaster = orderMasterRepository.save(orderMaster);
+        return orderDTO;
+    }
 }
