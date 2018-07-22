@@ -10,9 +10,14 @@ spring:
     show-sql: true
   jackson:
     default-property-inclusion: non_null
+  redis:
+    host: 192.168.11.143
+    port: 6379
 server:
   servlet:
     context-path: /sell
 wechat:
   mpAppId: wx725796ea31778c76
   mpAppSecret: a15ac79ed233c157322751413b9aeaf0
+projecturl:
+  sell: http://bravo.natapp1.cc

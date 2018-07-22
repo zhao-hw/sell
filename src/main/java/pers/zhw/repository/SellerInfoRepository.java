@@ -5,4 +5,5 @@ import pers.zhw.dataobject.SellerInfo;
 
 public interface SellerInfoRepository extends JpaRepository<SellerInfo,Object>{
     SellerInfo findByOpenid(String openid);
+    SellerInfo findByUsername(String openid);
 }
