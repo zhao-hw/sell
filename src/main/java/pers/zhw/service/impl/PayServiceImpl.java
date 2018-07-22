@@ -5,10 +5,8 @@ import com.lly835.bestpay.model.PayRequest;
 import com.lly835.bestpay.model.PayResponse;
 import com.lly835.bestpay.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.zhw.dto.OrderDTO;
-import pers.zhw.service.OrderService;
 import pers.zhw.service.PayService;
 
 @Service
@@ -16,12 +14,6 @@ import pers.zhw.service.PayService;
 public class PayServiceImpl implements PayService {
 
     private static final String ORDER_NAME = "微信点餐订单";
-
-    @Autowired
-    private BestPayServiceImpl bestPayService;
-
-    @Autowired
-    private OrderService orderService;
 
     @Override
     public PayResponse create(OrderDTO orderDTO) {
@@ -32,7 +24,6 @@ public class PayServiceImpl implements PayService {
         payRequest.setOrderName(ORDER_NAME);
         payRequest.setPayTypeEnum(BestPayTypeEnum.WXPAY_H5);
         log.info("【微信支付】发起支付, request={}", JsonUtil.toJson(payRequest));
-
         PayResponse payResponse = new PayResponse();
         log.info("【微信支付】发起支付, response={}", JsonUtil.toJson(payResponse));
         return payResponse;
