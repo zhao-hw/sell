@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import pers.zhw.dto.OrderDTO;
 import pers.zhw.enums.ResultEnum;
 import pers.zhw.exception.SellException;
+import pers.zhw.service.PushMessageService;
 import pers.zhw.service.impl.OrderServiceImpl;
 import pers.zhw.service.impl.PayServiceImpl;
 
@@ -36,6 +37,9 @@ public class WecahtController {
 
     @Autowired
     private OrderServiceImpl orderService;
+
+    @Autowired
+    private PushMessageService pushMessageService;
 
     @GetMapping("/authorize")
     public String authorize(@RequestParam("returnUrl") String returnUrl){
@@ -71,8 +75,9 @@ public class WecahtController {
         PayResponse payResponse = payService.create(orderDTO);
         map.put("payResponse", payResponse);
         map.put("returnUrl", returnUrl);
-        orderService.update(orderDTO,opid);
         orderService.paid(orderDTO);
+//        orderDTO = orderService.findOne(orderId);
+//        pushMessageService.orderStatus(orderDTO);
         return new ModelAndView("pay/create", map);
     }
 }

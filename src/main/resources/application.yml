@@ -19,5 +19,6 @@ server:
 wechat:
   mpAppId: wx725796ea31778c76
   mpAppSecret: a15ac79ed233c157322751413b9aeaf0
+  orderStatus: Jc8ehn3FJedWWb2qKujnmPH9Dub9ac1mcuQz8xwB4qc
 projecturl:
   sell: http://bravo.natapp1.cc

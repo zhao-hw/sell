@@ -12,4 +12,6 @@ public class WechatAccountConfig {
     private String mpAppId;
 
     private String mpAppSecret;
+
+    private String orderStatus;
 }

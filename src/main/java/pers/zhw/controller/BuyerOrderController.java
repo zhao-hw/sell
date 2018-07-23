@@ -14,6 +14,7 @@ import pers.zhw.exception.SellException;
 import pers.zhw.form.OrderForm;
 import pers.zhw.service.BuyerService;
 import pers.zhw.service.OrderService;
+import pers.zhw.service.PushMessageService;
 import pers.zhw.utils.ResultVOUtil;
 
 import javax.validation.Valid;
@@ -32,6 +33,9 @@ public class BuyerOrderController {
     @Autowired
     BuyerService buyerService;
 
+    @Autowired
+    private PushMessageService pushMessageService;
+
     @PostMapping("/create")
     public ResultVO<Map<String,String>> create(@Valid OrderForm orderForm, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
@@ -46,6 +50,9 @@ public class BuyerOrderController {
         OrderDTO result = orderService.create(orderDTO);
         Map<String,String> map = new HashMap<>();
         map.put("orderId",result.getOrderId());
+        orderDTO = orderService.findOne(orderDTO.getOrderId());
+        //推送消息
+        pushMessageService.orderStatus(orderDTO);
         return ResultVOUtil.success(map);
     }
 
