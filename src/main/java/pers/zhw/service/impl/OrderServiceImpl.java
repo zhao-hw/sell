@@ -46,7 +46,12 @@ public class OrderServiceImpl implements OrderService{
         BigDecimal orderAmount = new BigDecimal(BigInteger.ZERO);
         //1.查询商品(数量,价格)
         for (OrderDetail orderDetail:orderDTO.getOrderDetailList()){
-            ProductInfo productInfo = productService.findOne(orderDetail.getProductId());
+            ProductInfo productInfo = new ProductInfo();
+            try{
+                productInfo = productService.findOne(orderDetail.getProductId());
+            }catch (Exception e) {
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+            }
             if (productInfo == null){
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }

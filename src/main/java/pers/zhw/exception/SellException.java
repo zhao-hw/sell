@@ -1,7 +1,10 @@
 package pers.zhw.exception;
 
+import lombok.Getter;
 import pers.zhw.enums.ResultEnum;
 
+
+@Getter
 public class SellException extends RuntimeException{
 
     private Integer code;

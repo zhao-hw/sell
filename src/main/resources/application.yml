@@ -22,3 +22,8 @@ wechat:
   orderStatus: Jc8ehn3FJedWWb2qKujnmPH9Dub9ac1mcuQz8xwB4qc
 projecturl:
   sell: http://bravo.natapp1.cc
+logging:
+  level:
+    pers.zhw.dataobject.mapper: trace
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
