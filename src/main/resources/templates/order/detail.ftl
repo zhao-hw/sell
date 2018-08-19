@@ -58,7 +58,7 @@
                     <a href="/sell/seller/order/finish?orderId=${orderDTO.orderId}" type="button" class="btn btn-primary btn-lg">完结订单</a>
                     <a href="/sell/seller/order/cancel?orderId=${orderDTO.orderId}" type="button" class="btn btn-lg btn-danger">取消订单</a>
                 </#if>
-                    <a href="/sell/seller/order/orderList?page=1&&size=10" type="button" class="btn btn-primary btn-lg">返回列表</a>
+                    <a href="/sell/seller/order/list?page=1&&size=10" type="button" class="btn btn-primary btn-lg">返回列表</a>
                 </div>
             </div>
         </div>

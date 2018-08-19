@@ -34,7 +34,7 @@ public class SellerProductController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping("/productList")
+    @GetMapping("/list")
     public ModelAndView list(@RequestParam(value = "page",defaultValue = "1") Integer page,
                              @RequestParam(value = "size",defaultValue = "10") Integer size,
                              Map<String,Object> map){
@@ -53,10 +53,10 @@ public class SellerProductController {
             productService.onSale(productId);
         }catch (SellException e){
             map.put("msg",e.getMessage());
-            map.put("url","/sell/seller/product/productList");
+            map.put("url","/sell/seller/product/list");
             return new ModelAndView("/common/error",map);
         }
-        map.put("url","/sell/seller/product/productList");
+        map.put("url","/sell/seller/product/list");
         return new ModelAndView("/common/suces",map);
     }
 
@@ -67,10 +67,10 @@ public class SellerProductController {
             productService.offSale(productId);
         }catch (SellException e){
             map.put("msg",e.getMessage());
-            map.put("url","/sell/seller/product/productList");
+            map.put("url","/sell/seller/product/list");
             return new ModelAndView("/common/error",map);
         }
-        map.put("url","/sell/seller/product/productList");
+        map.put("url","/sell/seller/product/list");
         return new ModelAndView("/common/suces",map);
     }
 
@@ -92,7 +92,7 @@ public class SellerProductController {
                              Map<String, Object> map) {
         if (bindingResult.hasErrors()) {
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());
-            map.put("url", "/sell/seller/product/index");
+            map.put("url", "/sell/seller/product/index?productId="+form.getProductId());
             return new ModelAndView("/common/error", map);
         }
         ProductInfo productInfo = new ProductInfo();
@@ -109,7 +109,7 @@ public class SellerProductController {
             map.put("url", "/sell/seller/product/index");
             return new ModelAndView("/common/error", map);
         }
-        map.put("url", "/sell/seller/product/productList");
+        map.put("url", "/sell/seller/product/list");
         return new ModelAndView("/common/suces", map);
     }
 }
