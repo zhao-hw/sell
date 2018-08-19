@@ -24,7 +24,7 @@ public class SellerOrderController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/list")
+    @GetMapping("/orderList")
     public ModelAndView list(@RequestParam(value = "page",defaultValue = "1") Integer page,
                              @RequestParam(value = "size",defaultValue = "10") Integer size,
                              Map<String,Object> map) {

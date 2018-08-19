@@ -53,7 +53,7 @@ public class SellerUserController {
         redisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_PREFIX,token),username,expire, TimeUnit.SECONDS);
         //设置token到cookie
         CookieUtil.set(response, CookieConstant.TOKEN,token,expire);
-        return new ModelAndView("redirect:"+projectUrlConfig.getSell()+"/sell/seller/order/list");
+        return new ModelAndView("redirect:"+projectUrlConfig.getSell()+"/sell/seller/order/orderList");
     }
 
     @RequestMapping("/logout")

@@ -23,7 +23,7 @@ public class SellerCategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @RequestMapping("/list")
+    @RequestMapping("/categoryList")
     public ModelAndView list(Map<String,Object> map){
         List<ProductCategory> categoryList = categoryService.findAll();
         map.put("categoryList",categoryList);
@@ -61,7 +61,7 @@ public class SellerCategoryController {
             map.put("url", "/sell/seller/category/index");
             return new ModelAndView("/common/error", map);
         }
-        map.put("url", "/sell/seller/category/list");
+        map.put("url", "/sell/seller/category/categoryList");
         return new ModelAndView("/common/suces",map);
     }
 }
