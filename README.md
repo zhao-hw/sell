@@ -8,7 +8,7 @@
 - 查询、取消订单
 - 订单状态通知
 ## 项目地址
-[后台界面](http:bravo.natapp1.cc/sell/seller/order/list)
+[后台界面](http:me.cardistry.top/sell/seller/order/list)
 
 用户界面需要在微信中打开，因为个人没有接口权限，所以现在使用了微信提供的测试号，要求必须关注测试号才能访问网页，所以要扫描下面的二维码关注测试号，然后在底部菜单点击**项目演示-->用户界面**即可访问
 
