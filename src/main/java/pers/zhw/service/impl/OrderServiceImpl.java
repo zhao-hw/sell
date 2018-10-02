@@ -22,6 +22,7 @@ import pers.zhw.repository.OrderDetailRepository;
 import pers.zhw.repository.OrderMasterRepository;
 import pers.zhw.service.OrderService;
 import pers.zhw.service.ProductService;
+import pers.zhw.service.WebSocket;
 import pers.zhw.utils.KeyUtil;
 
 import java.math.BigDecimal;
@@ -38,6 +39,8 @@ public class OrderServiceImpl implements OrderService{
     OrderDetailRepository orderDetailRepository;
     @Autowired
     OrderMasterRepository orderMasterRepository;
+    @Autowired
+    WebSocket webSocket;
 
     @Override
     @Transactional
@@ -78,6 +81,8 @@ public class OrderServiceImpl implements OrderService{
                 new CartDTO(e.getProductId(), e.getProductQuantity())
         ).collect(Collectors.toList());
         productService.decreaseStock(cartDTOList);
+        //发送websocket消息
+        webSocket.sendMessage(orderDTO.getOrderId());
         return orderDTO;
     }
 
